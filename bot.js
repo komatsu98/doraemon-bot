@@ -1,12 +1,29 @@
-const Discord = require('discord.js'); 
+const Discord = require('discord.js');
+
 const client = new Discord.Client();
-client.login('NTczMzk1NTI3OTIwNTE3MTQy.XMqUXw.Bne6zNqFoBDhRW6Io1E5TMqlrn8');
-client.on('ready', () => {   
-    console.log('The bot is ready'); 
+
+ 
+
+client.on('ready', () => {
+
+    console.log('I am ready!');
+
 });
 
-client.on('message', (msg) => {
-if (msg.content.includes('drm')) {
-    msg.reply('Ai gọi Doraemon đấy?');
-}
+ 
+
+client.on('message', message => {
+
+    if (message.content === 'ping') {
+
+       message.reply('pong');
+
+       }
+
 });
+
+ 
+
+// THIS  MUST  BE  THIS  WAY
+
+client.login(process.env.BOT_TOKEN);
