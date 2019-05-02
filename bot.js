@@ -14,9 +14,9 @@ client.on('ready', () => {
 
 client.on('message', message => {
 
-    if (message.content === 'ping') {
+    if (message.content.includes('drm') {
 
-       message.reply('pong');
+       message.reply('meo meo');
 
        }
 
