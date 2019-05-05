@@ -18,9 +18,9 @@ client.on('message', receivedMessage => {
         return
     }
 
-    if (receivedMessage.content.startsWith("!")) {
-        processCommand(receivedMessage)
-    }
+//     if (receivedMessage.content.startsWith("!")) {
+//         processCommand(receivedMessage)
+//     }
 
     if (receivedMessage.content.startsWith("drm")) {
         receivedMessage.reply("meo meo :3")
