@@ -80,7 +80,7 @@ function multiplyCommand(arguments, receivedMessage) {
 function werewolfSetupCommand(arguments, receivedMessage) {
     let userId = arguments[0];
     let channelId = arguments[1];
-    let channelRole = client.get(channelId);
+    let channelRole = client.channels.get(channelId);
     channelRole.replacePermissionOverwrites({
     overwrites: [
       {
