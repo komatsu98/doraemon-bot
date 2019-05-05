@@ -79,10 +79,12 @@ function multiplyCommand(arguments, receivedMessage) {
 
 function werewolfSetupCommand(arguments, receivedMessage) {
     userId = arguments[0];
+    user = client.users.get(userId);
     let roleMutedId = 550268015350906891;
+    let roleQuanTroMaSoiId = 556208263042039808;
     channelId = arguments[1];
     channelRole = client.channels.get(channelId);
-    channelRole.replacePermissionOverwrites({
+    /*channelRole.replacePermissionOverwrites({
     overwrites: [
     //deny everyone to read messages
       {
@@ -97,13 +99,27 @@ function werewolfSetupCommand(arguments, receivedMessage) {
       },
     //allow role to read messages
       {
+         id: roleQuanTroMaSoiId,
+         allow: ['MANAGE_MESSAGES'],
+         allow: ['READ_MESSAGES'],
+         allow: ['READ_MESSAGES'],
+      },
+    //allow role to read messages
+      {
          id: userId,
          allow: ['READ_MESSAGES'],
       },
     ],
       reason: 'Grant permission.'
-    });
-    receivedMessage.channel.send(user.tag(userId) + " đã được thêm vào kênh " + channelRole.name);
+    });*/
+    // Overwrite permissions for a message author
+    channelRole.overwritePermissions(user, {
+      READ_MESSAGES: true
+    })
+      .then(updated => console.log(updated.permissionOverwrites.get(userId)))
+      .catch(console.error);
+
+    receivedMessage.send(`User: ${user.username}, Channel: ${channelRole.name}`);
 }
 
 // THIS  MUST  BE  THIS  WAY
