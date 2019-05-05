@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
-
- 
+const channel = new Discord.Channel();
+const user = new Discord.User();
 
 client.on('ready', () => {
 
@@ -78,11 +78,24 @@ function multiplyCommand(arguments, receivedMessage) {
 }
 
 function werewolfSetupCommand(arguments, receivedMessage) {
-    let userId = arguments[0];
-    let channelId = arguments[1];
-    let channelRole = client.channels.get(channelId);
+    userId = arguments[0];
+    let roleMutedId = 550268015350906891;
+    channelId = arguments[1];
+    channelRole = client.channels.get(channelId);
     channelRole.replacePermissionOverwrites({
     overwrites: [
+    //deny everyone to read messages
+      {
+         id: guild.id,
+         deny: ['READ_MESSAGES'],
+      },
+    //deny muted to send messages
+      {
+         id: roleMutedId,
+         deny: ['SEND_MESSAGES'],
+         deny: ['ADD_REACTIONS'],
+      },
+    //allow role to read messages
       {
          id: userId,
          allow: ['READ_MESSAGES'],
@@ -90,7 +103,7 @@ function werewolfSetupCommand(arguments, receivedMessage) {
     ],
       reason: 'Grant permission.'
     });
-    receivedMessage.channel.send(userId + "," + channelId + ",");
+    receivedMessage.channel.send(user.tag(userId) + " đã được thêm vào kênh " + channelRole.name);
 }
 
 // THIS  MUST  BE  THIS  WAY
