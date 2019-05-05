@@ -8,7 +8,7 @@ client.on('ready', () => {
 
     console.log('I am ready!');
 
-    client.user.setActivity("meo meo", {type: "LISTENING"});
+    client.user.setActivity("Cat", {type: "LISTENING"});
     
 });
 
@@ -80,8 +80,8 @@ function multiplyCommand(arguments, receivedMessage) {
 function werewolfSetupCommand(arguments, receivedMessage) {
     let userId = arguments[0];
     let channelId = arguments[1];
-    let channel = client.get(channelId);
-    channel.replacePermissionOverwrites({
+    let channelRole = client.get(channelId);
+    channelRole.replacePermissionOverwrites({
     overwrites: [
       {
          id: userId,
@@ -90,7 +90,7 @@ function werewolfSetupCommand(arguments, receivedMessage) {
     ],
       reason: 'Grant permission.'
     });
-
+    receivedMessage.channel.send(userId + "," + channelId + ",");
 }
 
 // THIS  MUST  BE  THIS  WAY
